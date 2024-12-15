@@ -1,0 +1,13 @@
+# Dependencias de Node.js
+node_modules/
+
+
+# Archivos de entorno
+.env
+
+# Salidas de compilación y distribuciones
+dist/
+
+# Archivos y directorios de recursos
+public/
+uploads/
