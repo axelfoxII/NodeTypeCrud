@@ -185,13 +185,25 @@ export const deleteUsuario = async (req: Request, res: Response) => {
 
         const { imagen } = (rows as any)[0]; // Obtenemos el nombre de la imagen asociada al usuario
 
-        // Eliminamos el archivo de la imagen del servidor
+        if(imagen == null){
+
+             // Eliminamos al usuario de la base de datos
+        await connection.query("DELETE FROM usuarios WHERE id = ?", [id]);
+        res.json({ message: "Archivo eliminado correctamente" });
+
+        }else{
+
+             // Eliminamos el archivo de la imagen del servidor
         await fs.unlink(path.resolve(`uploads/${imagen}`));
         console.log("Imagen eliminada del servidor");
 
         // Eliminamos al usuario de la base de datos
         await connection.query("DELETE FROM usuarios WHERE id = ?", [id]);
         res.json({ message: "Archivo eliminado correctamente" });
+
+        }
+
+       
 
     } catch (error) {
         console.error(error); // Imprimimos el error en la consola
